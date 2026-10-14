@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astrological Calendar 2026</title>
+<style>
+  :root{
+    --paper:#FDF7F1; --panel:rgba(255,255,255,.86); --panel-solid:#FFFBF7;
+    --edge:rgba(138,95,114,.16); --ink:#3E3340; --dim:#8A7A84; --faint:#AA98A3;
+    --rose:#D98BA6; --peach:#EFA97A; --mint:#5FC0A4; --lilac:#A98BD9;
+    --sky:#6FA8D9; --gold:#C9A227; --sun:#E8B54A;
+    --silver:#9AA7C7; --eclipse:#A98BD9; --mercury:#EFA97A; --venus:#D98BA6;
+    --ingress:#5FC0A4; --saturn:#6FA8D9; --full:#E8B54A; --new:#9AA7C7;
+    --today:rgba(217,139,166,.16); --hover:rgba(217,139,166,.10);
+    --wash1:rgba(217,139,166,.52); --wash2:rgba(239,169,122,.46);
+    --wash3:rgba(95,192,164,.40); --wash4:rgba(169,139,217,.44);
+    --wash5:rgba(111,168,217,.40);
+    --shade:0 14px 38px rgba(62,51,64,.10);
+  }
+  html[data-theme="night"]{
+    --paper:#191323; --panel:rgba(40,30,52,.72); --panel-solid:#221A2E;
+    --edge:rgba(226,190,206,.16); --ink:#EDE2EA; --dim:#B7A5B4; --faint:#8D7C8A;
+    --rose:#E8A8BE; --peach:#F3BE96; --mint:#79D3B9; --lilac:#C0A6E8;
+    --sky:#8FBFE8; --gold:#DDB85F; --sun:#F0C86A;
+    --silver:#B9C4DE; --eclipse:#C0A6E8; --mercury:#F3BE96; --venus:#E8A8BE;
+    --ingress:#79D3B9; --saturn:#8FBFE8; --full:#F0C86A; --new:#B9C4DE;
+    --today:rgba(232,168,190,.16); --hover:rgba(232,168,190,.09);
+    --wash1:rgba(232,168,190,.26); --wash2:rgba(243,190,150,.20);
+    --wash3:rgba(121,211,185,.18); --wash4:rgba(192,166,232,.22);
+    --wash5:rgba(143,191,232,.18);
+    --shade:0 14px 38px rgba(0,0,0,.42);
+  }
+  @media (prefers-color-scheme:dark){
+    html:not([data-theme="paper"]){
+      --paper:#191323; --panel:rgba(40,30,52,.72); --panel-solid:#221A2E;
+      --edge:rgba(226,190,206,.16); --ink:#EDE2EA; --dim:#B7A5B4; --faint:#8D7C8A;
+      --rose:#E8A8BE; --peach:#F3BE96; --mint:#79D3B9; --lilac:#C0A6E8;
+      --sky:#8FBFE8; --gold:#DDB85F; --sun:#F0C86A;
+      --silver:#B9C4DE; --eclipse:#C0A6E8; --mercury:#F3BE96; --venus:#E8A8BE;
+      --ingress:#79D3B9; --saturn:#8FBFE8; --full:#F0C86A; --new:#B9C4DE;
+      --today:rgba(232,168,190,.16); --hover:rgba(232,168,190,.09);
+      --wash1:rgba(232,168,190,.26); --wash2:rgba(243,190,150,.20);
+      --wash3:rgba(121,211,185,.18); --wash4:rgba(192,166,232,.22);
+      --wash5:rgba(143,191,232,.18);
+      --shade:0 14px 38px rgba(0,0,0,.42);
+    }
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--paper); color:var(--ink); min-height:100vh; overflow-x:hidden;
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* painted washes, layered like wet colour on paper */
+  body::before{
+    content:''; position:fixed; inset:-10%; z-index:-2; pointer-events:none;
+    background:
+      radial-gradient(28% 26% at 14% 12%, var(--wash1), transparent 68%),
+      radial-gradient(26% 24% at 82% 8%,  var(--wash2), transparent 68%),
+      radial-gradient(30% 28% at 90% 46%, var(--wash4), transparent 70%),
+      radial-gradient(28% 26% at 10% 58%, var(--wash3), transparent 70%),
+      radial-gradient(34% 30% at 50% 96%, var(--wash5), transparent 72%),
+      radial-gradient(22% 20% at 62% 30%, var(--wash2), transparent 66%);
+    filter:blur(34px) saturate(1.18); animation:drift 38s ease-in-out infinite alternate;
+    will-change:transform;
+  }
+  /* paper grain */
+  body::after{
+    content:''; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.30;
+    background-image:radial-gradient(circle at 1px 1px, rgba(120,90,110,.16) 1px, transparent 0);
+    background-size:4px 4px;
+  }
+  @keyframes drift{
+    from{transform:translate3d(0,0,0) scale(1)}
+    to{transform:translate3d(-2%,1.6%,0) scale(1.06)}
+  }
+  @media (prefers-reduced-motion:reduce){ body::before{animation:none} }
+
+  .wrapper{max-width:1080px;margin:0 auto;padding:44px 18px 72px}
+
+  .header{text-align:center;margin-bottom:26px}
+  .header h1{
+    font-size:clamp(28px,5.2vw,50px); font-weight:400; letter-spacing:.03em; line-height:1.12;
+    background:linear-gradient(96deg,var(--rose) 0%,var(--sun) 34%,var(--mint) 62%,var(--lilac) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    -webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 0 18px rgba(217,139,166,.42)) drop-shadow(0 0 34px rgba(239,169,122,.22));
+    background-size:220% 100%; animation:shimmer 12s ease-in-out infinite alternate;
+  }
+  @keyframes shimmer{from{background-position:0% 50%}to{background-position:100% 50%}}
+  @media (prefers-reduced-motion:reduce){.header h1{animation:none}}
+  .header h1::after{
+    content:'';display:block;width:min(240px,52%);height:10px;margin:14px auto 0;
+    border-radius:50% 50% 46% 54% / 62% 58% 42% 38%;
+    background:linear-gradient(96deg,var(--rose),var(--sun),var(--mint),var(--lilac));
+    filter:blur(3px);opacity:.72;
+  }
+  .header p{
+    margin-top:12px; font-family:"Inter",system-ui,sans-serif; font-size:11.5px;
+    letter-spacing:.24em; text-transform:uppercase; color:var(--dim);
+  }
+
+  .controls{display:flex;justify-content:center;gap:9px;margin:20px 0 4px;flex-wrap:wrap}
+  .ctl{
+    font-family:"Inter",system-ui,sans-serif; font-size:11.5px; letter-spacing:.13em;
+    text-transform:uppercase; color:var(--dim); cursor:pointer;
+    background:var(--panel); border:1px solid var(--edge); border-radius:999px;
+    padding:9px 17px; transition:all .22s ease;
+  }
+  .ctl:hover,.ctl:focus-visible{color:var(--ink);border-color:var(--rose);transform:translateY(-1px)}
+  .ctl[aria-pressed="true"]{
+    color:var(--ink); border-color:var(--rose);
+    background:linear-gradient(180deg,var(--wash1),transparent); box-shadow:var(--shade);
+  }
+
+  .year-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin:22px 0 26px}
+  .year-strip button{
+    font-family:"Inter",system-ui,sans-serif; font-size:12px; letter-spacing:.09em;
+    color:var(--dim); background:var(--panel); border:1px solid var(--edge);
+    border-radius:48% 52% 45% 55% / 55% 48% 52% 45%; padding:10px 18px; cursor:pointer;
+    transition:all .2s ease;
+  }
+  .year-strip button:hover{color:var(--ink);border-color:var(--rose);transform:translateY(-2px) rotate(-1.5deg)}
+  .year-strip button.active{
+    color:#fff; border-color:transparent; transform:rotate(1deg);
+    background:linear-gradient(135deg,var(--rose),var(--lilac));
+    box-shadow:0 7px 20px rgba(217,139,166,.40);
+  }
+
+  .nav{display:flex;align-items:center;justify-content:center;gap:22px;margin-bottom:22px}
+  .nav h2{font-size:clamp(21px,3.4vw,30px);font-weight:400;letter-spacing:.02em;min-width:9.5em;text-align:center}
+  .nav button{
+    width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:19px;color:var(--dim);
+    background:var(--panel);border:1px solid var(--edge);transition:all .2s ease;
+  }
+  .nav button:hover{color:var(--ink);border-color:var(--rose);transform:scale(1.07)}
+
+  .cal-grid{
+    background:var(--panel); border:1px solid var(--edge);
+    border-radius:26px 20px 28px 22px;
+    padding:14px; box-shadow:var(--shade); overflow:hidden;
+  }
+  .day-headers{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-bottom:8px}
+  .day-header{
+    text-align:center;font-family:"Inter",system-ui,sans-serif;font-size:10.5px;
+    letter-spacing:.20em;text-transform:uppercase;color:var(--faint);padding:7px 0;
+  }
+  .days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}
+  .day-cell{
+    position:relative;min-height:88px;border-radius:14px 11px 15px 12px;padding:8px;cursor:pointer;overflow:hidden;
+    background:var(--panel-solid);border:1px solid transparent;
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  }
+  .day-cell::after{
+    content:'';position:absolute;inset:0;pointer-events:none;opacity:0;
+    background:radial-gradient(70% 70% at 30% 20%, var(--wash1), transparent 70%),
+               radial-gradient(60% 60% at 80% 80%, var(--wash3), transparent 70%);
+    transition:opacity .34s ease;
+  }
+  .day-cell:hover{transform:translateY(-3px) rotate(-.5deg);border-color:var(--rose);box-shadow:var(--shade)}
+  .day-cell:hover::after{opacity:1}
+  .day-cell.empty{background:transparent;cursor:default;border-color:transparent}
+  .day-cell.empty:hover{transform:none;box-shadow:none}
+  .day-cell.today{background:var(--today);border-color:var(--rose)}
+  .day-cell.today .day-num{color:var(--rose);font-weight:600}
+  .day-cell.selected{border-color:var(--lilac);box-shadow:0 0 0 3px rgba(169,139,217,.22),var(--shade)}
+  .day-num{font-family:"Inter",system-ui,sans-serif;font-size:13px;color:var(--dim);margin-bottom:5px}
+
+  .moon-badge{
+    position:absolute;right:7px;top:7px;width:25px;height:25px;border-radius:50%;
+    transform:rotate(-8deg);
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+  }
+  .moon-badge.full{background:radial-gradient(circle,var(--full),transparent 72%);
+    box-shadow:0 0 16px rgba(232,181,74,.55)}
+  .moon-badge.new{background:radial-gradient(circle,var(--new),transparent 72%)}
+  .moon-badge.eclipse{background:radial-gradient(circle,var(--eclipse),transparent 72%);
+    box-shadow:0 0 16px rgba(169,139,217,.55)}
+
+  .event-tag{
+    display:block;font-family:"Inter",system-ui,sans-serif;font-size:9.5px;line-height:1.35;
+    letter-spacing:.02em;padding:3px 7px;border-radius:8px 5px 7px 6px;margin-top:3px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    background:var(--wash1);color:var(--ink);transition:opacity .25s ease;
+  }
+  .tag-mercury{background:rgba(239,169,122,.30)}
+  .tag-venus{background:rgba(217,139,166,.30)}
+  .tag-saturn,.tag-jupiter,.tag-uranus,.tag-neptune,.tag-pluto{background:rgba(111,168,217,.28)}
+  .tag-eclipse{background:rgba(169,139,217,.34)}
+  .tag-ingress{background:rgba(95,192,164,.28)}
+  .tag-season{background:rgba(232,181,74,.30)}
+  .tag-aspect{background:rgba(154,167,199,.26)}
+  .retrograde-stripe{
+    position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:0 0 12px 12px;
+    background:linear-gradient(90deg,var(--mercury),var(--venus),var(--saturn));opacity:.42;
+  }
+  body.filtering .event-tag,
+  body.filtering .moon-badge{opacity:.15;transition:opacity .25s ease}
+  body.filtering .event-tag.lit,
+  body.filtering .moon-badge.lit{opacity:1}
+  .moon-badge{transition:opacity .25s ease}
+
+  .detail-panel{
+    margin-top:22px;background:var(--panel);border:1px solid var(--edge);
+    border-radius:22px 28px 20px 26px;padding:22px 24px;min-height:110px;box-shadow:var(--shade);
+  }
+  .detail-panel h4{font-size:19px;font-weight:400;margin-bottom:12px;color:var(--ink)}
+  .no-event{color:var(--faint);font-style:italic}
+  .detail-event{display:flex;gap:13px;padding:11px 0;border-bottom:1px solid var(--edge)}
+  .detail-event:last-child{border-bottom:0}
+  .detail-event .icon{font-size:21px;line-height:1.2}
+  .detail-event .info strong{display:block;margin-bottom:3px;font-weight:600;font-size:15px}
+  .detail-event .info{font-family:"Inter",system-ui,sans-serif;font-size:13.5px;line-height:1.6;color:var(--dim)}
+
+  .rx-bar-section{
+    margin-top:26px;background:var(--panel);border:1px solid var(--edge);
+    border-radius:28px 20px 26px 22px;padding:22px 24px;box-shadow:var(--shade);
+  }
+  .rx-bar-section h3{
+    font-family:"Inter",system-ui,sans-serif;font-size:11px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--dim);font-weight:600;margin-bottom:17px;
+  }
+  .rx-bar-row{display:flex;align-items:center;gap:13px;margin-bottom:9px}
+  .rx-planet{width:94px;flex:0 0 94px;font-size:14px;color:var(--ink)}
+  .rx-track{flex:1;height:9px;background:var(--hover);border-radius:999px;position:relative;overflow:hidden}
+  .rx-fill{position:absolute;top:0;height:100%;border-radius:999px;opacity:.88}
+  .rx-dates{width:118px;flex:0 0 118px;text-align:right;
+    font-family:"Inter",system-ui,sans-serif;font-size:11px;color:var(--faint)}
+
+  .legend{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:26px}
+  .legend-item{
+    display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;
+    font-family:"Inter",system-ui,sans-serif;font-size:11.5px;color:var(--dim);
+    background:var(--panel);border:1px solid var(--edge);border-radius:46% 54% 52% 48% / 56% 46% 54% 44%;
+    padding:9px 17px;transition:all .2s ease;
+  }
+  .legend-item:hover{color:var(--ink);border-color:var(--rose);transform:translateY(-2px) rotate(1.5deg)}
+  .legend-item[aria-pressed="true"]{color:var(--ink);border-color:var(--rose);box-shadow:var(--shade)}
+  .legend-dot{width:10px;height:10px;border-radius:50%;flex:0 0 10px}
+
+  .promo-footer{
+    display:block;margin-top:40px;text-align:center;text-decoration:none;color:inherit;
+    background:var(--panel);border:1px solid var(--edge);border-radius:30px 24px 32px 26px;
+    padding:34px 26px;box-shadow:var(--shade);
+    transition:transform .22s ease,box-shadow .22s ease;
+  }
+  .promo-footer:hover{transform:translateY(-3px);box-shadow:0 20px 46px rgba(62,51,64,.16)}
+  .promo-star{font-size:22px;color:var(--gold);margin-bottom:11px}
+  .promo-footer h3{font-size:23px;font-weight:400;margin-bottom:11px}
+  .promo-footer p{font-family:"Inter",system-ui,sans-serif;font-size:14px;line-height:1.65;
+    color:var(--dim);max-width:46ch;margin:0 auto 20px}
+  .promo-btn{
+    display:inline-block;font-family:"Inter",system-ui,sans-serif;font-size:12px;
+    letter-spacing:.15em;text-transform:uppercase;color:#fff;
+    background:linear-gradient(135deg,var(--rose),var(--lilac));
+    padding:14px 30px;border-radius:999px;box-shadow:0 9px 24px rgba(217,139,166,.38);
+  }
+  :focus-visible{outline:2px solid var(--lilac);outline-offset:3px;border-radius:8px}
+
+  @media (max-width:640px){
+    .wrapper{padding:30px 12px 54px}
+    .day-cell{min-height:66px;padding:6px;border-radius:10px}
+    .event-tag{font-size:8.5px}
+    .rx-planet{width:70px;flex:0 0 70px;font-size:12.5px}
+    .rx-dates{width:84px;flex:0 0 84px;font-size:10px}
+  }
+  .pl-sm svg{width:12px;height:12px;vertical-align:-2px;margin-right:4px}
+  .pl-lg svg{width:28px;height:28px}
+  .ev-time{font-family:"Inter",system-ui,sans-serif;font-size:11.5px;letter-spacing:.06em;color:var(--dim);margin:2px 0 6px}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <h1>Astrological Calendar 2026</h1>
+    <p>Moon Phases · Eclipses · Retrogrades · Ingresses · shown in your own time zone</p>
+  </div>
+
+  <div class="controls">
+    <button class="ctl" id="themeBtn" type="button" aria-pressed="false">Night</button>
+    <button class="ctl" id="clearBtn" type="button" hidden>Show all</button>
+  </div>
+
+  <div class="year-strip" id="yearStrip"></div>
+
+  <div class="nav">
+    <button id="prevBtn">‹</button>
+    <h2 id="monthTitle"></h2>
+    <button id="nextBtn">›</button>
+  </div>
+
+  <div class="cal-grid">
+    <div class="day-headers">
+      <div class="day-header">Sun</div>
+      <div class="day-header">Mon</div>
+      <div class="day-header">Tue</div>
+      <div class="day-header">Wed</div>
+      <div class="day-header">Thu</div>
+      <div class="day-header">Fri</div>
+      <div class="day-header">Sat</div>
+    </div>
+    <div class="days-grid" id="daysGrid"></div>
+  </div>
+
+  <div class="detail-panel" id="detailPanel">
+    <p class="no-event">Click on a day to see its astrological details.</p>
+  </div>
+
+  <div class="rx-bar-section">
+    <h3>Retrograde Periods 2026</h3>
+    <div id="rxBars"></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item" role="button" tabindex="0" aria-pressed="false" data-filter="full"><div class="legend-dot" style="background:var(--gold)"></div> Full Moon</div>
+    <div class="legend-item" role="button" tabindex="0" aria-pressed="false" data-filter="new"><div class="legend-dot" style="background:var(--silver)"></div> New Moon</div>
+    <div class="legend-item" role="button" tabindex="0" aria-pressed="false" data-filter="tag-eclipse"><div class="legend-dot" style="background:var(--eclipse)"></div> Eclipse</div>
+    <div class="legend-item" role="button" tabindex="0" aria-pressed="false" data-filter="tag-mercury"><div class="legend-dot" style="background:var(--mercury)"></div> Mercury Retrograde</div>
+    <div class="legend-item" role="button" tabindex="0" aria-pressed="false" data-filter="tag-venus"><div class="legend-dot" style="background:var(--venus)"></div> Venus Retrograde</div>
+    <div class="legend-item" role="button" tabindex="0" aria-pressed="false" data-filter="tag-saturn tag-jupiter tag-uranus tag-neptune tag-pluto"><div class="legend-dot" style="background:var(--saturn)"></div> Saturn/Other Retrogrades</div>
+    <div class="legend-item" role="button" tabindex="0" aria-pressed="false" data-filter="tag-ingress"><div class="legend-dot" style="background:var(--ingress)"></div> Planetary Ingress</div>
+    <div class="legend-item" role="button" tabindex="0" aria-pressed="false" data-filter="tag-season"><div class="legend-dot" style="background:#ffdd44"></div> Equinox / Solstice</div>
+  </div>
+
+  <a class="promo-footer" href="https://www.etsy.com/shop/BeyondtheSymbol" target="_blank" rel="noopener">
+    <div class="promo-star">☾</div>
+    <h3>Go deeper than the calendar</h3>
+    <p>The calendar shows the sky for everyone. <strong>Your own birth chart</strong> shows what it means for you. Guides that read your chart with the AI you already use, in plain language.</p>
+    <span class="promo-btn">See the guides →</span>
+  </a>
+</div>
+
+<script>
+const MONTHS_RO = ['January','February','March','April','May','June',
+                   'July','August','September','October','November','December'];
+const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+// ─── ASTRONOMICAL DATA 2026 (Skyfield + JPL DE421, times in UTC) ─────────────────────────────────────────────────
+
+const PLANETS = {"Sun": "<svg class=\"planet\" viewBox=\"0 0 24 24\" aria-label=\"Sun\"><defs><radialGradient id=\"pg-sun\" cx=\"35%\" cy=\"32%\" r=\"70%\"><stop offset=\"0\" stop-color=\"#fff\" stop-opacity=\".9\"/><stop offset=\".25\" stop-color=\"#FFE48A\"/><stop offset=\"1\" stop-color=\"#E8961E\"/></radialGradient></defs><line x1=\"20.6\" y1=\"12.0\" x2=\"22.8\" y2=\"12.0\" stroke=\"#E8961E\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><line x1=\"18.1\" y1=\"18.1\" x2=\"19.6\" y2=\"19.6\" stroke=\"#E8961E\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><line x1=\"12.0\" y1=\"20.6\" x2=\"12.0\" y2=\"22.8\" stroke=\"#E8961E\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><line x1=\"5.9\" y1=\"18.1\" x2=\"4.4\" y2=\"19.6\" stroke=\"#E8961E\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><line x1=\"3.4\" y1=\"12.0\" x2=\"1.2\" y2=\"12.0\" stroke=\"#E8961E\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><line x1=\"5.9\" y1=\"5.9\" x2=\"4.4\" y2=\"4.4\" stroke=\"#E8961E\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><line x1=\"12.0\" y1=\"3.4\" x2=\"12.0\" y2=\"1.2\" stroke=\"#E8961E\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><line x1=\"18.1\" y1=\"5.9\" x2=\"19.6\" y2=\"4.4\" stroke=\"#E8961E\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"12\" r=\"7\" fill=\"url(#pg-sun)\"/></svg>", "Mercury": "<svg class=\"planet\" viewBox=\"0 0 24 24\" aria-label=\"Mercury\"><defs><radialGradient id=\"pg-mercury\" cx=\"35%\" cy=\"32%\" r=\"70%\"><stop offset=\"0\" stop-color=\"#fff\" stop-opacity=\".9\"/><stop offset=\".25\" stop-color=\"#E3D6C6\"/><stop offset=\"1\" stop-color=\"#8F7B6A\"/></radialGradient></defs><circle cx=\"12\" cy=\"12\" r=\"7\" fill=\"url(#pg-mercury)\"/></svg>", "Venus": "<svg class=\"planet\" viewBox=\"0 0 24 24\" aria-label=\"Venus\"><defs><radialGradient id=\"pg-venus\" cx=\"35%\" cy=\"32%\" r=\"70%\"><stop offset=\"0\" stop-color=\"#fff\" stop-opacity=\".9\"/><stop offset=\".25\" stop-color=\"#FBE0DA\"/><stop offset=\"1\" stop-color=\"#D98BA6\"/></radialGradient></defs><circle cx=\"12\" cy=\"12\" r=\"7\" fill=\"url(#pg-venus)\"/></svg>", "Mars": "<svg class=\"planet\" viewBox=\"0 0 24 24\" aria-label=\"Mars\"><defs><radialGradient id=\"pg-mars\" cx=\"35%\" cy=\"32%\" r=\"70%\"><stop offset=\"0\" stop-color=\"#fff\" stop-opacity=\".9\"/><stop offset=\".25\" stop-color=\"#F6A07E\"/><stop offset=\"1\" stop-color=\"#B5371F\"/></radialGradient></defs><circle cx=\"12\" cy=\"12\" r=\"7\" fill=\"url(#pg-mars)\"/></svg>", "Jupiter": "<svg class=\"planet\" viewBox=\"0 0 24 24\" aria-label=\"Jupiter\"><defs><radialGradient id=\"pg-jupiter\" cx=\"35%\" cy=\"32%\" r=\"70%\"><stop offset=\"0\" stop-color=\"#fff\" stop-opacity=\".9\"/><stop offset=\".25\" stop-color=\"#F6DDB0\"/><stop offset=\"1\" stop-color=\"#C98B52\"/></radialGradient></defs><circle cx=\"12\" cy=\"12\" r=\"7\" fill=\"url(#pg-jupiter)\"/><path d=\"M5.6 10.2h12.8M5.2 13.4h13.6\" stroke=\"#C98B52\" stroke-width=\"1\" opacity=\".55\"/></svg>", "Saturn": "<svg class=\"planet\" viewBox=\"0 0 24 24\" aria-label=\"Saturn\"><defs><radialGradient id=\"pg-saturn\" cx=\"35%\" cy=\"32%\" r=\"70%\"><stop offset=\"0\" stop-color=\"#fff\" stop-opacity=\".9\"/><stop offset=\".25\" stop-color=\"#F1E4B8\"/><stop offset=\"1\" stop-color=\"#B99A55\"/></radialGradient></defs><g transform=\"rotate(-20 12 12)\"><ellipse cx=\"12\" cy=\"12\" rx=\"11.2\" ry=\"3.4\" fill=\"none\" stroke=\"#B99A55\" stroke-width=\"1.3\"/></g><circle cx=\"12\" cy=\"12\" r=\"6.2\" fill=\"url(#pg-saturn)\"/><g transform=\"rotate(-20 12 12)\"><path d=\"M0.8 12 A11.2 3.4 0 0 0 23.2 12\" fill=\"none\" stroke=\"#B99A55\" stroke-width=\"1.3\"/></g></svg>", "Uranus": "<svg class=\"planet\" viewBox=\"0 0 24 24\" aria-label=\"Uranus\"><defs><radialGradient id=\"pg-uranus\" cx=\"35%\" cy=\"32%\" r=\"70%\"><stop offset=\"0\" stop-color=\"#fff\" stop-opacity=\".9\"/><stop offset=\".25\" stop-color=\"#C9F5F1\"/><stop offset=\"1\" stop-color=\"#3FAFA6\"/></radialGradient></defs><circle cx=\"12\" cy=\"12\" r=\"7\" fill=\"url(#pg-uranus)\"/></svg>", "Neptune": "<svg class=\"planet\" viewBox=\"0 0 24 24\" aria-label=\"Neptune\"><defs><radialGradient id=\"pg-neptune\" cx=\"35%\" cy=\"32%\" r=\"70%\"><stop offset=\"0\" stop-color=\"#fff\" stop-opacity=\".9\"/><stop offset=\".25\" stop-color=\"#A9C5FA\"/><stop offset=\"1\" stop-color=\"#2F4FB3\"/></radialGradient></defs><circle cx=\"12\" cy=\"12\" r=\"7\" fill=\"url(#pg-neptune)\"/></svg>", "Pluto": "<svg class=\"planet\" viewBox=\"0 0 24 24\" aria-label=\"Pluto\"><defs><radialGradient id=\"pg-pluto\" cx=\"35%\" cy=\"32%\" r=\"70%\"><stop offset=\"0\" stop-color=\"#fff\" stop-opacity=\".9\"/><stop offset=\".25\" stop-color=\"#D7B6E6\"/><stop offset=\"1\" stop-color=\"#5B3A73\"/></radialGradient></defs><circle cx=\"12\" cy=\"12\" r=\"7\" fill=\"url(#pg-pluto)\"/></svg>"};
+const EVENTS = {
+ "2026-01-03": [
+  {
+   "type": "full",
+   "icon": "🌕",
+   "label": "Full Moon in Cancer, the Wolf Moon",
+   "desc": "Feelings run high and things come to light around home, family and feeling safe. Notice what has grown since the last new moon, and what is ready to finish.",
+   "utc": "2026-01-03T10:02:00Z"
+  }
+ ],
+ "2026-01-18": [
+  {
+   "type": "new",
+   "icon": "🌑",
+   "label": "New Moon in Capricorn",
+   "desc": "A quiet beginning. A good day to set an intention around career, ambition and building for the long term. Start small and let it grow with the Moon.",
+   "utc": "2026-01-18T19:51:00Z"
+  }
+ ],
+ "2026-01-20": [
+  {
+   "type": "ingress",
+   "icon": "♒︎",
+   "label": "Aquarius season begins",
+   "desc": "The Sun enters Aquarius. For the next month the focus turns to friendship, community, the future and freedom. Happy birthday, Aquarius.",
+   "utc": "2026-01-20T01:44:00Z",
+   "planet": "Sun",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-01-23": [
+  {
+   "type": "ingress",
+   "icon": "♂︎",
+   "label": "Mars enters Aquarius",
+   "desc": "Mars, the planet of energy and action, moves into Aquarius. Your drive turns toward friendship, community, the future and freedom.",
+   "utc": "2026-01-23T09:16:00Z",
+   "planet": "Mars",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-01-26": [
+  {
+   "type": "ingress",
+   "icon": "♆︎",
+   "label": "Neptune enters Aries",
+   "desc": "Neptune, the planet of dreams and intuition, settles into Aries until 2039. It last visited Aries in the 1860s. A long era of new ideals and spiritual courage begins.",
+   "utc": "2026-01-26T17:35:00Z",
+   "planet": "Neptune",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-02-01": [
+  {
+   "type": "full",
+   "icon": "🌕",
+   "label": "Full Moon in Leo, the Snow Moon",
+   "desc": "Feelings run high and things come to light around creativity, joy, romance and being seen. Notice what has grown since the last new moon, and what is ready to finish.",
+   "utc": "2026-02-01T22:09:00Z"
+  }
+ ],
+ "2026-02-04": [
+  {
+   "type": "uranus",
+   "icon": "♅︎",
+   "label": "Uranus turns direct in Taurus",
+   "desc": "Uranus moves forward again. Expect fresh momentum around change and new ideas.",
+   "utc": "2026-02-04T02:33:00Z",
+   "planet": "Uranus",
+   "cls": "tag-uranus"
+  }
+ ],
+ "2026-02-14": [
+  {
+   "type": "ingress",
+   "icon": "♄︎",
+   "label": "Saturn enters Aries",
+   "desc": "Saturn, the planet of structure and responsibility, settles into Aries until 2028. It asks you to build something of your own, with discipline and courage. It last visited Aries in the late 1990s.",
+   "utc": "2026-02-14T00:11:00Z",
+   "planet": "Saturn",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-02-17": [
+  {
+   "type": "eclipse",
+   "icon": "🌑",
+   "label": "Annular Solar Eclipse in Aquarius",
+   "desc": "A ring-of-fire solar eclipse in Aquarius, visible mainly from Antarctica. The Moon covers the centre of the Sun and leaves a bright ring. A powerful new beginning around friendship, community, the future and freedom.",
+   "utc": "2026-02-17T12:01:00Z",
+   "cls": "tag-eclipse"
+  }
+ ],
+ "2026-02-18": [
+  {
+   "type": "ingress",
+   "icon": "♓︎",
+   "label": "Pisces season begins",
+   "desc": "The Sun enters Pisces. For the next month the focus turns to rest, dreams, intuition and compassion. Happy birthday, Pisces.",
+   "utc": "2026-02-18T15:51:00Z",
+   "planet": "Sun",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-02-20": [
+  {
+   "type": "ingress",
+   "icon": "♄︎",
+   "label": "Saturn meets Neptune at 0° Aries",
+   "desc": "Saturn and Neptune meet at the very first degree of the zodiac, something that happens about once every 36 years. The last time was 1989, the year the Berlin Wall fell. Structure meets the dream: a good time to give your ideals a real shape.",
+   "utc": "2026-02-20T16:53:00Z",
+   "planet": "Saturn",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-02-26": [
+  {
+   "type": "mercury",
+   "icon": "☿︎℞",
+   "label": "Mercury turns retrograde in Pisces",
+   "desc": "Mercury slows down: messages, travel plans and technology need a second look. Good for revising, rereading and reconnecting. Sign contracts with extra care. Retrograde until 20 March.",
+   "utc": "2026-02-26T06:48:00Z",
+   "planet": "Mercury",
+   "cls": "tag-mercury"
+  }
+ ],
+ "2026-03-02": [
+  {
+   "type": "ingress",
+   "icon": "♂︎",
+   "label": "Mars enters Pisces",
+   "desc": "Mars, the planet of energy and action, moves into Pisces. Your drive turns toward rest, dreams, intuition and compassion.",
+   "utc": "2026-03-02T14:15:00Z",
+   "planet": "Mars",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-03-03": [
+  {
+   "type": "eclipse",
+   "icon": "🌕",
+   "label": "Total Lunar Eclipse in Virgo, the Worm Moon",
+   "desc": "A total lunar eclipse: the full Moon turns copper red, visible from the Americas, East Asia and Australia. A chapter around health, daily routines and useful work comes to a clear close.",
+   "utc": "2026-03-03T11:37:00Z",
+   "cls": "tag-eclipse"
+  }
+ ],
+ "2026-03-11": [
+  {
+   "type": "jupiter",
+   "icon": "♃︎",
+   "label": "Jupiter turns direct in Cancer",
+   "desc": "Jupiter moves forward again. Growth, opportunities and good news start flowing outward.",
+   "utc": "2026-03-11T03:29:00Z",
+   "planet": "Jupiter",
+   "cls": "tag-jupiter"
+  }
+ ],
+ "2026-03-19": [
+  {
+   "type": "new",
+   "icon": "🌑",
+   "label": "New Moon in Pisces",
+   "desc": "A quiet beginning. A good day to set an intention around rest, dreams, intuition and compassion. Start small and let it grow with the Moon.",
+   "utc": "2026-03-19T01:23:00Z"
+  }
+ ],
+ "2026-03-20": [
+  {
+   "type": "season",
+   "icon": "☀",
+   "label": "March equinox",
+   "desc": "Day and night are equal. Spring begins in the north and the astrological year starts again with Aries.",
+   "utc": "2026-03-20T14:45:00Z",
+   "planet": "Sun",
+   "cls": "tag-season"
+  },
+  {
+   "type": "mercury",
+   "icon": "☿︎",
+   "label": "Mercury turns direct in Pisces",
+   "desc": "Mercury moves forward again. Plans, talks and travel pick up speed. Give it a few days before big decisions.",
+   "utc": "2026-03-20T19:32:00Z",
+   "planet": "Mercury",
+   "cls": "tag-mercury"
+  }
+ ],
+ "2026-04-02": [
+  {
+   "type": "full",
+   "icon": "🌕",
+   "label": "Full Moon in Libra, the Pink Moon",
+   "desc": "Feelings run high and things come to light around relationships, agreements, balance and beauty. Notice what has grown since the last new moon, and what is ready to finish.",
+   "utc": "2026-04-02T02:11:00Z"
+  }
+ ],
+ "2026-04-09": [
+  {
+   "type": "ingress",
+   "icon": "♂︎",
+   "label": "Mars enters Aries",
+   "desc": "Mars, the planet of energy and action, moves into Aries. Your drive turns toward courage, fresh starts and putting yourself first.",
+   "utc": "2026-04-09T19:36:00Z",
+   "planet": "Mars",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-04-17": [
+  {
+   "type": "new",
+   "icon": "🌑",
+   "label": "New Moon in Aries",
+   "desc": "A quiet beginning. A good day to set an intention around courage, fresh starts and putting yourself first. Start small and let it grow with the Moon.",
+   "utc": "2026-04-17T11:51:00Z"
+  }
+ ],
+ "2026-04-20": [
+  {
+   "type": "ingress",
+   "icon": "♉︎",
+   "label": "Taurus season begins",
+   "desc": "The Sun enters Taurus. For the next month the focus turns to money, comfort, your body and what you truly value. Happy birthday, Taurus.",
+   "utc": "2026-04-20T01:39:00Z",
+   "planet": "Sun",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-04-26": [
+  {
+   "type": "ingress",
+   "icon": "♅︎",
+   "label": "Uranus enters Gemini",
+   "desc": "Uranus, the planet of sudden change, settles into Gemini until 2033. Expect years of surprises in how we talk, learn, write and travel. It last visited Gemini in the 1940s.",
+   "utc": "2026-04-26T00:50:00Z",
+   "planet": "Uranus",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-05-01": [
+  {
+   "type": "full",
+   "icon": "🌕",
+   "label": "Full Moon in Scorpio, the Flower Moon",
+   "desc": "Feelings run high and things come to light around intimacy, shared money, letting go and inner power. Notice what has grown since the last new moon, and what is ready to finish.",
+   "utc": "2026-05-01T17:23:00Z"
+  }
+ ],
+ "2026-05-06": [
+  {
+   "type": "pluto",
+   "icon": "♇︎℞",
+   "label": "Pluto turns retrograde in Aquarius",
+   "desc": "Pluto, the planet of deep transformation, turns back. A long, quiet season of letting go of what no longer has power over you. Retrograde until 16 October.",
+   "utc": "2026-05-06T15:34:00Z",
+   "planet": "Pluto",
+   "cls": "tag-pluto"
+  }
+ ],
+ "2026-05-16": [
+  {
+   "type": "new",
+   "icon": "🌑",
+   "label": "New Moon in Taurus",
+   "desc": "A quiet beginning. A good day to set an intention around money, comfort, your body and what you truly value. Start small and let it grow with the Moon.",
+   "utc": "2026-05-16T20:01:00Z"
+  }
+ ],
+ "2026-05-18": [
+  {
+   "type": "ingress",
+   "icon": "♂︎",
+   "label": "Mars enters Taurus",
+   "desc": "Mars, the planet of energy and action, moves into Taurus. Your drive turns toward money, comfort, your body and what you truly value.",
+   "utc": "2026-05-18T22:25:00Z",
+   "planet": "Mars",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-05-21": [
+  {
+   "type": "ingress",
+   "icon": "♊︎",
+   "label": "Gemini season begins",
+   "desc": "The Sun enters Gemini. For the next month the focus turns to conversations, learning, writing and new ideas. Happy birthday, Gemini.",
+   "utc": "2026-05-21T00:36:00Z",
+   "planet": "Sun",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-05-31": [
+  {
+   "type": "full",
+   "icon": "🌕",
+   "label": "Full Moon in Sagittarius, the Blue Moon",
+   "desc": "Feelings run high and things come to light around travel, study, faith and the bigger picture. Notice what has grown since the last new moon, and what is ready to finish.",
+   "utc": "2026-05-31T08:45:00Z"
+  }
+ ],
+ "2026-06-15": [
+  {
+   "type": "new",
+   "icon": "🌑",
+   "label": "New Moon in Gemini",
+   "desc": "A quiet beginning. A good day to set an intention around conversations, learning, writing and new ideas. Start small and let it grow with the Moon.",
+   "utc": "2026-06-15T02:54:00Z"
+  }
+ ],
+ "2026-06-21": [
+  {
+   "type": "season",
+   "icon": "☀",
+   "label": "June solstice",
+   "desc": "The longest day of the year in the north. A moment to celebrate how far you have come.",
+   "utc": "2026-06-21T08:24:00Z",
+   "planet": "Sun",
+   "cls": "tag-season"
+  }
+ ],
+ "2026-06-28": [
+  {
+   "type": "ingress",
+   "icon": "♂︎",
+   "label": "Mars enters Gemini",
+   "desc": "Mars, the planet of energy and action, moves into Gemini. Your drive turns toward conversations, learning, writing and new ideas.",
+   "utc": "2026-06-28T19:29:00Z",
+   "planet": "Mars",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-06-29": [
+  {
+   "type": "mercury",
+   "icon": "☿︎℞",
+   "label": "Mercury turns retrograde in Cancer",
+   "desc": "Mercury slows down: messages, travel plans and technology need a second look. Good for revising, rereading and reconnecting. Sign contracts with extra care. Retrograde until 23 July.",
+   "utc": "2026-06-29T17:35:00Z",
+   "planet": "Mercury",
+   "cls": "tag-mercury"
+  },
+  {
+   "type": "full",
+   "icon": "🌕",
+   "label": "Full Moon in Capricorn, the Strawberry Moon",
+   "desc": "Feelings run high and things come to light around career, ambition and building for the long term. Notice what has grown since the last new moon, and what is ready to finish.",
+   "utc": "2026-06-29T23:56:00Z"
+  }
+ ],
+ "2026-06-30": [
+  {
+   "type": "ingress",
+   "icon": "♃︎",
+   "label": "Jupiter enters Leo",
+   "desc": "Jupiter, the planet of growth and luck, moves into Leo for about a year. Growth comes through creativity, joy, romance and being seen. It last visited Leo in 2014 and 2015.",
+   "utc": "2026-06-30T05:52:00Z",
+   "planet": "Jupiter",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-07-07": [
+  {
+   "type": "neptune",
+   "icon": "♆︎℞",
+   "label": "Neptune turns retrograde in Aries",
+   "desc": "Neptune, the planet of dreams and intuition, turns back. Illusions fade, and what is real becomes easier to see. Retrograde until 12 December.",
+   "utc": "2026-07-07T10:54:00Z",
+   "planet": "Neptune",
+   "cls": "tag-neptune"
+  }
+ ],
+ "2026-07-14": [
+  {
+   "type": "new",
+   "icon": "🌑",
+   "label": "New Moon in Cancer",
+   "desc": "A quiet beginning. A good day to set an intention around home, family and feeling safe. Start small and let it grow with the Moon.",
+   "utc": "2026-07-14T09:43:00Z"
+  }
+ ],
+ "2026-07-22": [
+  {
+   "type": "ingress",
+   "icon": "♌︎",
+   "label": "Leo season begins",
+   "desc": "The Sun enters Leo. For the next month the focus turns to creativity, joy, romance and being seen. Happy birthday, Leo.",
+   "utc": "2026-07-22T19:13:00Z",
+   "planet": "Sun",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-07-23": [
+  {
+   "type": "mercury",
+   "icon": "☿︎",
+   "label": "Mercury turns direct in Cancer",
+   "desc": "Mercury moves forward again. Plans, talks and travel pick up speed. Give it a few days before big decisions.",
+   "utc": "2026-07-23T22:57:00Z",
+   "planet": "Mercury",
+   "cls": "tag-mercury"
+  }
+ ],
+ "2026-07-26": [
+  {
+   "type": "saturn",
+   "icon": "♄︎℞",
+   "label": "Saturn turns retrograde in Aries",
+   "desc": "Saturn, the planet of structure and responsibility, turns back. A season for checking your foundations and finishing old commitments. Retrograde until 10 December.",
+   "utc": "2026-07-26T19:56:00Z",
+   "planet": "Saturn",
+   "cls": "tag-saturn"
+  }
+ ],
+ "2026-07-29": [
+  {
+   "type": "full",
+   "icon": "🌕",
+   "label": "Full Moon in Aquarius, the Buck Moon",
+   "desc": "Feelings run high and things come to light around friendship, community, the future and freedom. Notice what has grown since the last new moon, and what is ready to finish.",
+   "utc": "2026-07-29T14:35:00Z"
+  }
+ ],
+ "2026-08-11": [
+  {
+   "type": "ingress",
+   "icon": "♂︎",
+   "label": "Mars enters Cancer",
+   "desc": "Mars, the planet of energy and action, moves into Cancer. Your drive turns toward home, family and feeling safe.",
+   "utc": "2026-08-11T08:30:00Z",
+   "planet": "Mars",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-08-12": [
+  {
+   "type": "eclipse",
+   "icon": "🌑",
+   "label": "Total Solar Eclipse in Leo",
+   "desc": "A total solar eclipse in Leo across Greenland, Iceland and Spain, the first total eclipse seen from mainland Europe since 1999. A big new chapter around creativity, joy, romance and being seen.",
+   "utc": "2026-08-12T17:36:00Z",
+   "cls": "tag-eclipse"
+  }
+ ],
+ "2026-08-23": [
+  {
+   "type": "ingress",
+   "icon": "♍︎",
+   "label": "Virgo season begins",
+   "desc": "The Sun enters Virgo. For the next month the focus turns to health, daily routines and useful work. Happy birthday, Virgo.",
+   "utc": "2026-08-23T02:18:00Z",
+   "planet": "Sun",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-08-28": [
+  {
+   "type": "eclipse",
+   "icon": "🌕",
+   "label": "Partial Lunar Eclipse in Pisces, the Sturgeon Moon",
+   "desc": "A deep partial lunar eclipse: almost the whole Moon slips into Earth's shadow, visible from the Americas, Europe and Africa. Something around rest, dreams, intuition and compassion is ready to be released.",
+   "utc": "2026-08-28T04:18:00Z",
+   "cls": "tag-eclipse"
+  }
+ ],
+ "2026-09-10": [
+  {
+   "type": "uranus",
+   "icon": "♅︎℞",
+   "label": "Uranus turns retrograde in Gemini",
+   "desc": "Uranus, the planet of sudden change, turns back. Changes that started earlier get tested and settled. Retrograde until 8 February 2027.",
+   "utc": "2026-09-10T18:27:00Z",
+   "planet": "Uranus",
+   "cls": "tag-uranus"
+  }
+ ],
+ "2026-09-11": [
+  {
+   "type": "new",
+   "icon": "🌑",
+   "label": "New Moon in Virgo",
+   "desc": "A quiet beginning. A good day to set an intention around health, daily routines and useful work. Start small and let it grow with the Moon.",
+   "utc": "2026-09-11T03:26:00Z"
+  }
+ ],
+ "2026-09-23": [
+  {
+   "type": "season",
+   "icon": "☀",
+   "label": "September equinox",
+   "desc": "Day and night are equal again. A moment of balance before the darker half of the year.",
+   "utc": "2026-09-23T00:05:00Z",
+   "planet": "Sun",
+   "cls": "tag-season"
+  }
+ ],
+ "2026-09-26": [
+  {
+   "type": "full",
+   "icon": "🌕",
+   "label": "Full Moon in Aries, the Harvest Moon",
+   "desc": "Feelings run high and things come to light around courage, fresh starts and putting yourself first. Notice what has grown since the last new moon, and what is ready to finish.",
+   "utc": "2026-09-26T16:49:00Z"
+  }
+ ],
+ "2026-09-28": [
+  {
+   "type": "ingress",
+   "icon": "♂︎",
+   "label": "Mars enters Leo",
+   "desc": "Mars, the planet of energy and action, moves into Leo. Your drive turns toward creativity, joy, romance and being seen.",
+   "utc": "2026-09-28T02:48:00Z",
+   "planet": "Mars",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-10-03": [
+  {
+   "type": "venus",
+   "icon": "♀︎℞",
+   "label": "Venus turns retrograde in Scorpio",
+   "desc": "Venus, the planet of love, beauty and money, turns back. Old flames, old prices and old tastes return for review. Not the moment for big purchases, makeovers or rushing into commitments. Retrograde until 14 November.",
+   "utc": "2026-10-03T07:15:00Z",
+   "planet": "Venus",
+   "cls": "tag-venus"
+  }
+ ],
+ "2026-10-10": [
+  {
+   "type": "new",
+   "icon": "🌑",
+   "label": "New Moon in Libra",
+   "desc": "A quiet beginning. A good day to set an intention around relationships, agreements, balance and beauty. Start small and let it grow with the Moon.",
+   "utc": "2026-10-10T15:50:00Z"
+  }
+ ],
+ "2026-10-16": [
+  {
+   "type": "pluto",
+   "icon": "♇︎",
+   "label": "Pluto turns direct in Aquarius",
+   "desc": "Pluto moves forward again. The inner work of the past months starts to show on the outside.",
+   "utc": "2026-10-16T02:39:00Z",
+   "planet": "Pluto",
+   "cls": "tag-pluto"
+  }
+ ],
+ "2026-10-23": [
+  {
+   "type": "ingress",
+   "icon": "♏︎",
+   "label": "Scorpio season begins",
+   "desc": "The Sun enters Scorpio. For the next month the focus turns to intimacy, shared money, letting go and inner power. Happy birthday, Scorpio.",
+   "utc": "2026-10-23T09:37:00Z",
+   "planet": "Sun",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-10-24": [
+  {
+   "type": "mercury",
+   "icon": "☿︎℞",
+   "label": "Mercury turns retrograde in Scorpio",
+   "desc": "Mercury slows down: messages, travel plans and technology need a second look. Good for revising, rereading and reconnecting. Sign contracts with extra care. Retrograde until 13 November.",
+   "utc": "2026-10-24T07:12:00Z",
+   "planet": "Mercury",
+   "cls": "tag-mercury"
+  }
+ ],
+ "2026-10-26": [
+  {
+   "type": "full",
+   "icon": "🌕",
+   "label": "Full Moon in Taurus, the Hunter's Moon",
+   "desc": "Feelings run high and things come to light around money, comfort, your body and what you truly value. Notice what has grown since the last new moon, and what is ready to finish.",
+   "utc": "2026-10-26T04:11:00Z"
+  }
+ ],
+ "2026-11-09": [
+  {
+   "type": "new",
+   "icon": "🌑",
+   "label": "New Moon in Scorpio",
+   "desc": "A quiet beginning. A good day to set an intention around intimacy, shared money, letting go and inner power. Start small and let it grow with the Moon.",
+   "utc": "2026-11-09T07:02:00Z"
+  }
+ ],
+ "2026-11-13": [
+  {
+   "type": "mercury",
+   "icon": "☿︎",
+   "label": "Mercury turns direct in Scorpio",
+   "desc": "Mercury moves forward again. Plans, talks and travel pick up speed. Give it a few days before big decisions.",
+   "utc": "2026-11-13T15:53:00Z",
+   "planet": "Mercury",
+   "cls": "tag-mercury"
+  }
+ ],
+ "2026-11-14": [
+  {
+   "type": "venus",
+   "icon": "♀︎",
+   "label": "Venus turns direct in Libra",
+   "desc": "Venus moves forward again. Love, money and pleasure feel clearer, and decisions made now hold better.",
+   "utc": "2026-11-14T00:27:00Z",
+   "planet": "Venus",
+   "cls": "tag-venus"
+  }
+ ],
+ "2026-11-22": [
+  {
+   "type": "ingress",
+   "icon": "♐︎",
+   "label": "Sagittarius season begins",
+   "desc": "The Sun enters Sagittarius. For the next month the focus turns to travel, study, faith and the bigger picture. Happy birthday, Sagittarius.",
+   "utc": "2026-11-22T07:23:00Z",
+   "planet": "Sun",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-11-24": [
+  {
+   "type": "full",
+   "icon": "🌕",
+   "label": "Full Moon in Gemini, the Beaver Moon",
+   "desc": "Feelings run high and things come to light around conversations, learning, writing and new ideas. Notice what has grown since the last new moon, and what is ready to finish.",
+   "utc": "2026-11-24T14:53:00Z"
+  }
+ ],
+ "2026-11-25": [
+  {
+   "type": "ingress",
+   "icon": "♂︎",
+   "label": "Mars enters Virgo",
+   "desc": "Mars, the planet of energy and action, moves into Virgo. Your drive turns toward health, daily routines and useful work.",
+   "utc": "2026-11-25T23:37:00Z",
+   "planet": "Mars",
+   "cls": "tag-ingress"
+  }
+ ],
+ "2026-12-09": [
+  {
+   "type": "new",
+   "icon": "🌑",
+   "label": "New Moon in Sagittarius",
+   "desc": "A quiet beginning. A good day to set an intention around travel, study, faith and the bigger picture. Start small and let it grow with the Moon.",
+   "utc": "2026-12-09T00:51:00Z"
+  }
+ ],
+ "2026-12-10": [
+  {
+   "type": "saturn",
+   "icon": "♄︎",
+   "label": "Saturn turns direct in Aries",
+   "desc": "Saturn moves forward again. Plans you have tested can now be built properly.",
+   "utc": "2026-12-10T23:31:00Z",
+   "planet": "Saturn",
+   "cls": "tag-saturn"
+  }
+ ],
+ "2026-12-12": [
+  {
+   "type": "neptune",
+   "icon": "♆︎",
+   "label": "Neptune turns direct in Aries",
+   "desc": "Neptune moves forward again. Dreams and creative projects find clearer direction.",
+   "utc": "2026-12-12T22:18:00Z",
+   "planet": "Neptune",
+   "cls": "tag-neptune"
+  }
+ ],
+ "2026-12-13": [
+  {
+   "type": "jupiter",
+   "icon": "♃︎℞",
+   "label": "Jupiter turns retrograde in Leo",
+   "desc": "Jupiter, the planet of growth and luck, rests. Growth happens inside first: review what you want more of. Retrograde until 13 April 2027.",
+   "utc": "2026-12-13T00:56:00Z",
+   "planet": "Jupiter",
+   "cls": "tag-jupiter"
+  }
+ ],
+ "2026-12-21": [
+  {
+   "type": "season",
+   "icon": "☀",
+   "label": "December solstice",
+   "desc": "The longest night of the year in the north. From here the light returns.",
+   "utc": "2026-12-21T20:50:00Z",
+   "planet": "Sun",
+   "cls": "tag-season"
+  }
+ ],
+ "2026-12-24": [
+  {
+   "type": "full",
+   "icon": "🌕",
+   "label": "Full Moon in Cancer, the Cold Moon",
+   "desc": "Feelings run high and things come to light around home, family and feeling safe. Notice what has grown since the last new moon, and what is ready to finish.",
+   "utc": "2026-12-24T01:28:00Z"
+  }
+ ]
+};
+
+// Retrograde periods for the bar chart
+const RETROGRADES = [
+ {
+  "planet": "Uranus ♅︎",
+  "start": "2025-09-06",
+  "end": "2026-02-04",
+  "color": "#4FC0B6"
+ },
+ {
+  "planet": "Jupiter ♃︎",
+  "start": "2025-11-11",
+  "end": "2026-03-11",
+  "color": "#D9A066"
+ },
+ {
+  "planet": "Mercury ☿︎",
+  "start": "2026-02-26",
+  "end": "2026-03-20",
+  "color": "#A8927F"
+ },
+ {
+  "planet": "Pluto ♇︎",
+  "start": "2026-05-06",
+  "end": "2026-10-16",
+  "color": "#7B529A"
+ },
+ {
+  "planet": "Mercury ☿︎",
+  "start": "2026-06-29",
+  "end": "2026-07-23",
+  "color": "#A8927F"
+ },
+ {
+  "planet": "Neptune ♆︎",
+  "start": "2026-07-07",
+  "end": "2026-12-12",
+  "color": "#4A6BD0"
+ },
+ {
+  "planet": "Saturn ♄︎",
+  "start": "2026-07-26",
+  "end": "2026-12-10",
+  "color": "#C9AE6A"
+ },
+ {
+  "planet": "Uranus ♅︎",
+  "start": "2026-09-10",
+  "end": "2027-02-08",
+  "color": "#4FC0B6"
+ },
+ {
+  "planet": "Venus ♀︎",
+  "start": "2026-10-03",
+  "end": "2026-11-14",
+  "color": "#D98BA6"
+ },
+ {
+  "planet": "Mercury ☿︎",
+  "start": "2026-10-24",
+  "end": "2026-11-13",
+  "color": "#A8927F"
+ },
+ {
+  "planet": "Jupiter ♃︎",
+  "start": "2026-12-13",
+  "end": "2027-04-13",
+  "color": "#D9A066"
+ }
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let currentMonth = (new Date().getFullYear() === 2026) ? new Date().getMonth() : 0;
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function dateKey(y,m,d) {
+  return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+}
+
+function getRetrogrades(y,m,d) {
+  const key = dateKey(y,m,d);
+  const dt = new Date(key);
+  return RETROGRADES.filter(r => {
+    const s = new Date(r.start), e = new Date(r.end);
+    return dt >= s && dt <= e;
+  });
+}
+
+// ─── RENDER CALENDAR ─────────────────────────────────────────────────────────
+function render() {
+  const year = 2026;
+  const month = currentMonth;
+  document.getElementById('monthTitle').textContent = `${MONTHS_RO[month]} ${year}`;
+
+  // Update year strip
+  document.querySelectorAll('.year-strip button').forEach((btn, i) => {
+    btn.classList.toggle('active', i === month);
+  });
+
+  const grid = document.getElementById('daysGrid');
+  grid.innerHTML = '';
+
+  const firstDay = new Date(year, month, 1).getDay(); // 0=Sun
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  // US convention: week starts on Sunday
+  const offset = firstDay;
+
+  const today = new Date();
+  const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
+
+  // Empty cells before
+  for (let i = 0; i < offset; i++) {
+    const empty = document.createElement('div');
+    empty.className = 'day-cell empty';
+    grid.appendChild(empty);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = dateKey(year, month, d);
+    const events = EVENTS[key] || [];
+    const rxToday = getRetrogrades(year, month, d);
+    const isToday = isCurrentMonth && d === today.getDate();
+
+    const cell = document.createElement('div');
+    cell.className = 'day-cell' + (events.length ? ' has-event' : '') + (isToday ? ' today' : '');
+    cell.dataset.date = key;
+
+    // Retrograde stripe
+    if (rxToday.length > 0) {
+      const stripe = document.createElement('div');
+      stripe.className = 'retrograde-stripe';
+      if (rxToday.length > 1) {
+        stripe.style.background = `linear-gradient(90deg, ${rxToday.map(r=>r.color).join(',')})`;
+      } else {
+        stripe.style.background = rxToday[0].color;
+      }
+      cell.appendChild(stripe);
+    }
+
+    // Day number
+    const num = document.createElement('span');
+    num.className = 'day-num';
+    num.textContent = d;
+    cell.appendChild(num);
+
+    // Events
+    events.forEach(ev => {
+      if (ev.type === 'full' || ev.type === 'new') {
+        const moon = document.createElement('span');
+        moon.className = `moon-badge ${ev.type}`;
+        moon.textContent = ev.type === 'full' ? '🌕' : '🌑';
+        cell.appendChild(moon);
+      } else if (ev.type === 'eclipse') {
+        const moon = document.createElement('span');
+        moon.className = 'moon-badge eclipse';
+        moon.textContent = ev.icon;
+        cell.appendChild(moon);
+      }
+      const tag = document.createElement('span');
+      const cls = ev.cls || (
+        ev.type === 'full'    ? 'tag-ingress' :
+        ev.type === 'new'     ? 'tag-ingress' :
+        ev.type === 'eclipse' ? 'tag-eclipse' :
+        ev.type === 'mercury' ? 'tag-mercury' :
+        ev.type === 'venus'   ? 'tag-venus'   :
+        ev.type === 'saturn'  ? 'tag-saturn'  :
+        ev.type === 'season'  ? 'tag-season'  : 'tag-aspect'
+      );
+      tag.className = `event-tag ${cls}`;
+      tag.innerHTML = (ev.planet && PLANETS[ev.planet] ? `<span class="pl-sm">${PLANETS[ev.planet]}</span>` : '') + ev.label.split(',')[0].trim().split('(')[0].trim().substring(0,22);
+      cell.appendChild(tag);
+    });
+
+    cell.addEventListener('click', () => showDetail(key, d, month));
+    grid.appendChild(cell);
+  }
+
+  renderRxBars();
+}
+
+// ─── DETAIL PANEL ────────────────────────────────────────────────────────────
+function showDetail(key, d, month) {
+  document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('selected'));
+  document.querySelector(`[data-date="${key}"]`)?.classList.add('selected');
+
+  const panel = document.getElementById('detailPanel');
+  const events = EVENTS[key] || [];
+  const rxList = getRetrogrades(2026, month, d);
+
+  const dateStr = `${MONTHS_RO[month]} ${d}, 2026`;
+
+  if (events.length === 0 && rxList.length === 0) {
+    panel.innerHTML = `<h3>${dateStr}</h3><p class="no-event">No major astrological event on this day.</p>`;
+    return;
+  }
+
+  let html = `<h3>${dateStr}</h3>`;
+
+  events.forEach(ev => {
+    const borderColors = {
+      full:'#62c6ff', new:'#d0d8ff', eclipse:'#c060ff', mercury:'#ff8844',
+      venus:'#ff5599', ingress:'#44ddbb', saturn:'#88aaff', season:'#ffdd44',
+      aspect:'#6677ff', jupiter:'#ffaa44', neptune:'#5588ff', pluto:'#aa55ff', uranus:'#44ccbb'
+    };
+    const color = borderColors[ev.type] || '#6677ff';
+    html += `
+      <div class="detail-event" style="border-left-color:${color}">
+        <div class="icon">${ev.planet && PLANETS[ev.planet] ? `<span class="pl-lg">${PLANETS[ev.planet]}</span>` : ev.icon}</div>
+        <div class="info">
+          <h4>${ev.label}</h4>${ev.utc ? `<p class="ev-time">${new Date(ev.utc).toLocaleString([], {weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'})} your time</p>` : ''}
+          <p>${ev.desc}</p>
+        </div>
+      </div>`;
+  });
+
+  if (rxList.length > 0) {
+    html += `<div class="detail-event" style="border-left-color:#888">
+      <div class="icon">℞</div>
+      <div class="info">
+        <h4>Planets Retrograde today</h4>
+        <p>${rxList.map(r => `${r.planet} (${r.start} → ${r.end})`).join('<br>')}</p>
+      </div>
+    </div>`;
+  }
+
+  panel.innerHTML = html;
+}
+
+// ─── RETROGRADE BARS ─────────────────────────────────────────────────────────
+function renderRxBars() {
+  const container = document.getElementById('rxBars');
+  const start2026 = new Date('2026-01-01').getTime();
+  const end2026   = new Date('2026-12-31').getTime();
+  const total = end2026 - start2026;
+
+  // Group by planet name (first word)
+  const grouped = {};
+  RETROGRADES.forEach(r => {
+    const key = r.planet;
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push(r);
+  });
+
+  let html = '';
+  Object.entries(grouped).forEach(([planet, periods]) => {
+    html += `<div class="rx-bar-row">
+      <div class="rx-planet">${planet}</div>
+      <div class="rx-track">`;
+    periods.forEach(r => {
+      const s = Math.max(new Date(r.start).getTime(), start2026);
+      const e = Math.min(new Date(r.end).getTime(), end2026);
+      const left  = ((s - start2026) / total * 100).toFixed(1);
+      const width = ((e - s) / total * 100).toFixed(1);
+      const months = ((e-s)/(1000*60*60*24*30.5)).toFixed(1);
+      html += `<div class="rx-fill" style="left:${left}%;width:${width}%;background:${r.color}" title="${r.start} → ${r.end} (~${months} months)"></div>`;
+    });
+    const labels = periods.map(r => {
+      const sm = new Date(r.start).getMonth();
+      const em = new Date(r.end).getMonth();
+      return `${MONTHS_SHORT[sm]}–${MONTHS_SHORT[em]}`;
+    }).join(', ');
+    html += `</div>
+      <div class="rx-dates">${labels}</div>
+    </div>`;
+  });
+
+  // Month tick labels
+  html += `<div class="rx-bar-row" style="margin-top:4px">
+    <div class="rx-planet"></div>
+    <div class="rx-track" style="height:auto;background:none">
+      <div style="display:flex;justify-content:space-between;font-size:0.6rem;color:var(--dim)">
+        ${MONTHS_SHORT.map(m=>`<span>${m}</span>`).join('')}
+      </div>
+    </div>
+    <div class="rx-dates"></div>
+  </div>`;
+
+  container.innerHTML = html;
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+const strip = document.getElementById('yearStrip');
+MONTHS_SHORT.forEach((m, i) => {
+  const btn = document.createElement('button');
+  btn.textContent = m;
+  btn.addEventListener('click', () => { currentMonth = i; render(); });
+  strip.appendChild(btn);
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  if (currentMonth > 0) { currentMonth--; render(); }
+});
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if (currentMonth < 11) { currentMonth++; render(); }
+});
+
+render();
+</script>
+
+<script>
+(function () {
+  var root = document.documentElement, btn = document.getElementById('themeBtn');
+  var saved = null;
+  try { saved = localStorage.getItem('cal-theme'); } catch (e) {}
+  function apply(t) {
+    if (t) root.setAttribute('data-theme', t); else root.removeAttribute('data-theme');
+    var night = t === 'night';
+    btn.textContent = night ? 'Paper' : 'Night';
+    btn.setAttribute('aria-pressed', night ? 'true' : 'false');
+  }
+  apply(saved);
+  btn.addEventListener('click', function () {
+    var isNight = root.getAttribute('data-theme') === 'night';
+    var next = isNight ? 'paper' : 'night';
+    apply(next);
+    try { localStorage.setItem('cal-theme', next); } catch (e) {}
+  });
+
+  var active = new Set(), clear = document.getElementById('clearBtn');
+  function paint() {
+    var on = active.size > 0;
+    document.body.classList.toggle('filtering', on);
+    clear.hidden = !on;
+    var lit = [];
+    active.forEach(function (f) { f.split(' ').forEach(function (c) { lit.push(c); }); });
+    document.querySelectorAll('.event-tag, .moon-badge').forEach(function (el) {
+      el.classList.toggle('lit', lit.some(function (c) { return el.classList.contains(c); }));
+    });
+  }
+  function toggle(el) {
+    var f = el.dataset.filter, isOn = active.has(f);
+    if (isOn) { active.delete(f); } else { active.add(f); }
+    el.setAttribute('aria-pressed', isOn ? 'false' : 'true');
+    paint();
+  }
+  document.querySelectorAll('.legend-item').forEach(function (el) {
+    el.addEventListener('click', function () { toggle(el); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(el); }
+    });
+  });
+  clear.addEventListener('click', function () {
+    active.clear();
+    document.querySelectorAll('.legend-item').forEach(function (el) {
+      el.setAttribute('aria-pressed', 'false');
+    });
+    paint();
+  });
+
+  // re-apply the current filter whenever the month is redrawn
+  var grid = document.getElementById('daysGrid');
+  if (grid && 'MutationObserver' in window) {
+    new MutationObserver(function () { if (active.size) paint(); })
+      .observe(grid, { childList: true });
+  }
+})();
+</script>
+</body>
+</html>
